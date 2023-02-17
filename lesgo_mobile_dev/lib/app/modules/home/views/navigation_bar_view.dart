@@ -14,9 +14,11 @@ class NavigationBarView extends GetView<HomeController> {
     var controller = Get.find<HomeController>();
     return Obx(() {
       Get.put(ProfileController());
-      (controller.role_id.value == 3)
-          ? Get.put(LearningController())
-          : Get.put(PaymentController());
+      Future.delayed(
+          Duration(milliseconds: 900), () => Get.put(PaymentController()));
+      // (controller.role_id.value == 3)
+      //     ? Get.put(LearningController())
+      //     : Get.put(PaymentController());
       return Scaffold(
         body: (controller.role_id.value == 3)
             ? controller.userViews.elementAt(controller.selected_view.value)
@@ -32,7 +34,7 @@ class NavigationBarView extends GetView<HomeController> {
             (controller.role_id.value == 3)
                 ? const BottomNavigationBarItem(
                     icon: Icon(Icons.school),
-                    label: 'Learning',
+                    label: 'Your Course',
                   )
                 : const BottomNavigationBarItem(
                     icon: Icon(Icons.payment),

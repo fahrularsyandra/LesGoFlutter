@@ -33,9 +33,23 @@ class UserCourseCard extends StatelessWidget {
             Row(
               children: [
                 h6("Status : "),
-                (userCourse.isApproved!)
-                    ? h6("Approved", tc: BackgroundColor.green)
-                    : h6("Waiting for Approval", tc: BackgroundColor.orange)
+                h7(
+                  (userCourse.isApproved! == 0)
+                      ? "Wating for Payment"
+                      : (userCourse.isApproved! == 1)
+                          ? "Waiting for Approval"
+                          : (userCourse.isApproved! == 2) 
+                            ? "Approved"
+                            : "Rejected",
+                  fw: FontWeight.w500,
+                  tc: (userCourse.isApproved! == 0)
+                      ? Colors.black54
+                      : (userCourse.isApproved! == 1)
+                          ? BackgroundColor.orange
+                          : (userCourse.isApproved! == 2)
+                          ? BackgroundColor.green
+                          : BackgroundColor.red,
+                ),
               ],
             ),
             SizedBox(
@@ -53,12 +67,12 @@ class UserCourseCard extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       color: BackgroundColor.green,
-                      onPressed: (!userCourse.isApproved!)
+                      onPressed: (userCourse.isApproved == 1)
                           ? () {
                               var controller =
                                   Get.find<UserCoursesController>();
                               controller.approveUser(
-                                  userCourse.id, userCourse.courseId);
+                                  userCourse.id, userCourse.courseId, 2);
                             }
                           : null,
                       child:
@@ -74,7 +88,14 @@ class UserCourseCard extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       color: BackgroundColor.orange,
-                      onPressed: (!userCourse.isApproved!) ? () {} : null,
+                      onPressed: (userCourse.isApproved == 1)
+                          ? () {
+                              var controller =
+                                  Get.find<UserCoursesController>();
+                              controller.approveUser(
+                                  userCourse.id, userCourse.courseId, 3);
+                            }
+                          : null,
                       child:
                           h7("Reject", fw: FontWeight.w500, tc: Colors.white),
                     ),

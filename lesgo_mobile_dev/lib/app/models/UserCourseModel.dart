@@ -4,7 +4,7 @@ class UserCourse {
   int? companyId;
   int? courseId;
   int? paymentId;
-  bool? isApproved;
+  int? isApproved;
   User? user;
 
   UserCourse(

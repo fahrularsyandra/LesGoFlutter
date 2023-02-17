@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:lesgo_mobile_dev/app/modules/learning/views/active_learning_view.dart';
+import 'package:lesgo_mobile_dev/styles/colors.dart';
 import 'package:lesgo_mobile_dev/styles/text.dart';
 
 import '../controllers/learning_controller.dart';
@@ -17,14 +18,15 @@ class LearningView extends GetView<LearningController> {
           appBar: AppBar(
             title: const Text('LearningView'),
             centerTitle: true,
-            bottom: TabBar(tabs: [
-              Tab(
-                icon: h5("Active"),
-              ),
-              Tab(
-                icon: h5("History"),
-              ),
-            ]),
+            backgroundColor: BackgroundColor.blue,
+            // bottom: TabBar(tabs: [
+            //   Tab(
+            //     icon: h5("Active"),
+            //   ),
+            //   Tab(
+            //     icon: h5("History"),
+            //   ),
+            // ]),
           ),
           body: TabBarView(
             children: [

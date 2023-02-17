@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:lesgo_mobile_dev/app/modules/payment/views/payment_detail_view.dart';
 
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/auth_view.dart';
@@ -56,8 +57,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PAYMENT,
-      page: () => const PaymentView(),
       binding: PaymentBinding(),
+      page: () => const PaymentView(),
     ),
+    // GetPage(
+    //   name: _Paths.PAYMENT_DETAIL,
+    //   binding: PaymentBinding(),
+    //   page: () => const PaymentDetailView(),
+    // ),
   ];
 }

@@ -28,7 +28,8 @@ class AuthController extends GetxController {
         sp.setInt("role_id", response.data["data"]["role_id"]);
         await sp.setString(
             "access_token", response.data["data"]["access_token"]);
-        sp.reload();
+        await sp.reload();
+        
         Get.offAllNamed(Routes.HOME);
       }
     } on DioError catch (e) {
@@ -53,17 +54,9 @@ class AuthController extends GetxController {
         Get.offAllNamed(Routes.AUTH);
       }
     } on DioError catch (e) {
-      print(e.response);
       Get.snackbar(
           e.response!.statusCode.toString(), e.response!.data["message"]);
     }
-    // print(response);
-    // if (response.statusCode == 201) {
-    //   Get.back();
-    // } else {
-    //   print(response.data);
-    //   Get.dialog(h6(response.data["data"]), name: "${response.statusCode}");
-    // }
   }
 
   @override

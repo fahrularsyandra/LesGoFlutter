@@ -4,21 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:lesgo_mobile_dev/app/models/CourseModel.dart';
+import 'package:lesgo_mobile_dev/app/models/PaymentDetailModel.dart';
 import 'package:lesgo_mobile_dev/app/modules/home/controllers/home_controller.dart';
-import 'package:lesgo_mobile_dev/app/modules/learning/components/PaymentCard.dart';
 import 'package:lesgo_mobile_dev/styles/colors.dart';
 import 'package:lesgo_mobile_dev/styles/text.dart';
 
-class CourseDetailView extends GetView {
-  Course course;
-  CourseDetailView(this.course, {Key? key}) : super(key: key);
+class PaymentDetailView extends GetView {
+  PaymentDetail paymendDetail;
+  PaymentDetailView(this.paymendDetail, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<HomeController>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CourseDetailView'),
+        title: const Text('PaymentDetailView'),
         centerTitle: true,
         backgroundColor: BackgroundColor.blue,
       ),
@@ -41,7 +40,7 @@ class CourseDetailView extends GetView {
                                 // borderRadius: BorderRadius.circular(24),
                                 color: Colors.white),
                             // child: Center(
-                            //   child: h5(course.img ?? '-'),
+                            //   child: h5(paymendDetail.course!.img ?? '-'),
                             // ),
                             child: Image.network(
                                 "https://docs.flutter.dev/assets/images/flutter-logo-sharing.png"),
@@ -65,47 +64,16 @@ class CourseDetailView extends GetView {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        h6(course.name ?? '-',
+                                        h6(
+                                            paymendDetail
+                                                    .course!.name ??
+                                                '-',
                                             fw: FontWeight.w500),
                                         h6(
-                                          course.company?.name ?? '-',
+                                          paymendDetail.company?.name ?? '-',
                                           fw: FontWeight.w500,
                                         ),
                                       ],
-                                    ),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        color: Colors.lightBlue,
-                                      ),
-                                      width: 80,
-                                      height: 28,
-                                      child: Center(
-                                        child: h7("Active",
-                                            tc: Colors.white,
-                                            fw: FontWeight.w600),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0, vertical: 2),
-                                child: Row(
-                                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Icon(
-                                      Icons.location_city,
-                                      size: 18,
-                                      color: Colors.grey,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: h7(
-                                          course.company!.address ??
-                                              'Online Event',
-                                          fw: FontWeight.w500),
                                     )
                                   ],
                                 ),
@@ -123,13 +91,13 @@ class CourseDetailView extends GetView {
                                     Padding(
                                       padding: const EdgeInsets.only(left: 8.0),
                                       child: h7(
-                                          '${formatDate(DateTime.parse(course.startDate!.replaceAll('/', '-')), [
+                                          '${formatDate(DateTime.parse(paymendDetail.course!.startDate!.replaceAll('/', '-')), [
                                                 dd,
                                                 ' ',
                                                 MM,
                                                 ' ',
                                                 yyyy
-                                              ])} - ${formatDate(DateTime.parse(course.startDate!.replaceAll('/', '-')), [
+                                              ])} - ${formatDate(DateTime.parse(paymendDetail.course!.startDate!.replaceAll('/', '-')), [
                                                 dd,
                                                 ' ',
                                                 MM,
@@ -193,7 +161,38 @@ class CourseDetailView extends GetView {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  const Divider(
+                    thickness: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            h7("Transfer", fw: FontWeight.w600),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            h6('${paymendDetail.payment!.providerService} - ${paymendDetail.payment!.name}'),
+                            h5( paymendDetail.payment!.accountNumber.toString(),
+                                fw: FontWeight.w600,
+                                tc: BackgroundColor.orange),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 10,
+                  ),
                 ],
               ),
             ),
@@ -215,54 +214,20 @@ class CourseDetailView extends GetView {
                           NumberFormat.simpleCurrency(
                             locale: 'id',
                             name: 'Rp',
-                          ).format(int.parse(course.price!)),
+                          ).format(int.parse(paymendDetail.course!.price!)),
                           fw: FontWeight.w600,
                           tc: BackgroundColor.orange),
                     ),
                     MaterialButton(
                       height: 40,
-                      minWidth: 60,
+                      minWidth: 100,
                       color: BackgroundColor.green,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                       onPressed: () {
-
-                        Get.bottomSheet(Container(
-                          // height: 300,
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Column(
-                            children: [
-                              Center(
-                                child: Container(
-                                  height: 6,
-                                  width: 100,
-                                  decoration: BoxDecoration(color: BackgroundColor.blue,
-                                  borderRadius: BorderRadius.circular(10)),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                              for (var e in controller.payments)
-                                Column(
-                                  children: [
-                                    PaymentCard(
-                                        e, course.companyId!, course.id!),
-                                    const Divider(
-                                      thickness: 5,
-                                      height: 5,
-                                    )
-                                  ],
-                                )
-                            ],
-                          ),
-                        ));
+                        controller.pay(paymendDetail.id.toString());
                       },
-                      child: h6("Join Course",
-                          tc: Colors.white, fw: FontWeight.w600),
+                      child: h6("Pay", tc: Colors.white, fw: FontWeight.w600),
                     )
                   ],
                 ),

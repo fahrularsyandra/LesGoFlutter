@@ -7,7 +7,6 @@ class UserCoursesBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<UserCoursesController>(
       () {
-        print(Get.arguments);
         return UserCoursesController();
       },
     );

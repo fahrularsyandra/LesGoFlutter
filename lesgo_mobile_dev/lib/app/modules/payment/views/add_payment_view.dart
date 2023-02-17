@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:lesgo_mobile_dev/app/modules/payment/controllers/payment_controller.dart';
 import 'package:lesgo_mobile_dev/styles/text.dart';
 
+import '../../../../styles/colors.dart';
+
 class AddPaymentView extends GetView {
   const AddPaymentView({Key? key}) : super(key: key);
   @override
@@ -14,6 +16,7 @@ class AddPaymentView extends GetView {
         appBar: AppBar(
           title: const Text('AddPaymentView'),
           centerTitle: true,
+        backgroundColor: BackgroundColor.blue,
         ),
         body: SingleChildScrollView(
           child: Container(

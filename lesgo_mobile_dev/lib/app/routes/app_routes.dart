@@ -10,6 +10,7 @@ abstract class Routes {
   static const USER_COURSES = _Paths.USER_COURSES;
   static const ADD_USER_COURSES = _Paths.ADD_USER_COURSES;
   static const PAYMENT = _Paths.PAYMENT;
+  static const PAYMENT_DETAIL = _Paths.PAYMENT_DETAIL;
   static const COMPANY = _Paths.COMPANY;
 }
 
@@ -22,5 +23,6 @@ abstract class _Paths {
   static const USER_COURSES = '/user-courses';
   static const ADD_USER_COURSES = '/add-user-courses';
   static const PAYMENT = '/payment';
+  static const PAYMENT_DETAIL = '/payment-detail';
   static const COMPANY = '/company';
 }

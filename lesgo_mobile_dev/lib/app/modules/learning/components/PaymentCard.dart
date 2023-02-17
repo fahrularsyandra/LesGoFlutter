@@ -26,22 +26,22 @@ class PaymentCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         child: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6.0),
-              child: Container(
-                width: 130,
-                height: 100,
-                color: Color(0xffd9d9d9),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(horizontal: 6.0),
+            //   child: Container(
+            //     width: 130,
+            //     height: 100,
+            //     color: Color(0xffd9d9d9),
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  h6("BCA"),
-                  h6("VA: 2132132132131231"),
-                  h6("Aditya Bagaskara"),
+                  h6(payment.providerService),
+                  h6("VA: ${payment.accountNumber}"),
+                  h6(payment.name),
                 ],
               ),
             )

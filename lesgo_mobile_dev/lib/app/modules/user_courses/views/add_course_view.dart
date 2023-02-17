@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lesgo_mobile_dev/app/modules/user_courses/controllers/user_courses_controller.dart';
+import 'package:lesgo_mobile_dev/styles/colors.dart';
 import 'package:lesgo_mobile_dev/styles/text.dart';
 
 class AddCourseView extends GetView {
@@ -17,6 +18,7 @@ class AddCourseView extends GetView {
         appBar: AppBar(
           title: const Text('AddCourseView'),
           centerTitle: true,
+        backgroundColor: BackgroundColor.blue,
         ),
         body: SingleChildScrollView(
           child: Padding(

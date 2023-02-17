@@ -5,6 +5,7 @@ import 'package:lesgo_mobile_dev/app/models/CourseModel.dart';
 import 'package:lesgo_mobile_dev/app/modules/home/controllers/home_controller.dart';
 import 'package:lesgo_mobile_dev/app/modules/learning/views/course_detail_view.dart';
 import 'package:lesgo_mobile_dev/app/routes/app_pages.dart';
+import 'package:lesgo_mobile_dev/const.dart';
 import 'package:lesgo_mobile_dev/styles/text.dart';
 import 'package:intl/intl.dart';
 
@@ -22,11 +23,11 @@ class LearningCard extends StatelessWidget {
         var controller = Get.find<HomeController>();
         if (controller.role_id == 2) {
           Get.toNamed(Routes.USER_COURSES, arguments: {
-            "company_id": course.courseTag!.companyId,
+            "company_id": course.companyId,
             "course_id": course.id
           });
         } else {
-          controller.getPayment(course.courseTag!.companyId);
+          controller.getPayment(course.companyId);
           Get.to(() => CourseDetailView(course));
         }
       },
@@ -35,7 +36,7 @@ class LearningCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Color(0xfff4f4f4)),
+              color: Colors.white),
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Row(
             children: [
@@ -46,8 +47,8 @@ class LearningCard extends StatelessWidget {
                     child: Container(
                       height: 100,
                       decoration: BoxDecoration(
-                          color: Color(0xffd9d9d9),
                           borderRadius: BorderRadius.circular(12)),
+                          child: Image.network('$IMAGE_PATH/course/${course.img}', fit: BoxFit.fill,),
                     ),
                   )),
               Expanded(
@@ -64,12 +65,15 @@ class LearningCard extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                h6(course.description, fw: FontWeight.w600),
+                                // h6(course.courseTag!.name, fw: FontWeight.w600),
+                                h7(course.name, fw: FontWeight.w600, ta: TextAlign.left),
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    h9(course.courseTag!.name,
+                                    // h9(course.description,
+                                    //     fw: FontWeight.w500),
+                                    h9(course.company?.name ?? '',
                                         fw: FontWeight.w500),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(

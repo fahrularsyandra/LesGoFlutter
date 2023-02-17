@@ -1,78 +1,60 @@
 class Course {
   int? id;
-  int? courseTagId;
+  int? companyId;
+  String? name;
   String? description;
   int? quota;
+  int? participant;
   String? startDate;
   String? endDate;
   String? price;
   String? img;
   bool? isActive;
-  CourseTag? courseTag;
+  Company? company;
 
   Course(
       {this.id,
-      this.courseTagId,
+      this.companyId,
+      this.name,
       this.description,
       this.quota,
+      this.participant,
       this.startDate,
       this.endDate,
       this.price,
       this.img,
       this.isActive,
-      this.courseTag});
+      this.company});
 
   Course.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    courseTagId = json['course_tag_id'];
+    companyId = json['company_id'];
+    name = json['name'];
     description = json['description'];
     quota = json['quota'];
+    participant = json['participant'];
     startDate = json['start_date'];
     endDate = json['end_date'];
     price = json['price'];
     img = json['img'];
     isActive = json['is_active'];
-    courseTag = json['course_tag'] != null
-        ? new CourseTag.fromJson(json['course_tag'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['course_tag_id'] = this.courseTagId;
-    data['description'] = this.description;
-    data['quota'] = this.quota;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
-    data['price'] = this.price;
-    data['img'] = this.img;
-    data['is_active'] = this.isActive;
-    if (this.courseTag != null) {
-      data['course_tag'] = this.courseTag!.toJson();
-    }
-    return data;
-  }
-}
-
-class CourseTag {
-  String? name;
-  int? companyId;
-  Company? company;
-
-  CourseTag({this.name, this.companyId, this.company});
-
-  CourseTag.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    companyId = json['company_id'];
     company =
         json['company'] != null ? new Company.fromJson(json['company']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
+    data['id'] = this.id;
     data['company_id'] = this.companyId;
+    data['name'] = this.name;
+    data['description'] = this.description;
+    data['quota'] = this.quota;
+    data['participant'] = this.participant;
+    data['start_date'] = this.startDate;
+    data['end_date'] = this.endDate;
+    data['price'] = this.price;
+    data['img'] = this.img;
+    data['is_active'] = this.isActive;
     if (this.company != null) {
       data['company'] = this.company!.toJson();
     }
@@ -82,16 +64,25 @@ class CourseTag {
 
 class Company {
   String? name;
+  String? description;
+  String? address;
+  String? phone;
 
-  Company({this.name});
+  Company({this.name, this.description, this.address, this.phone});
 
   Company.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    description = json['description'];
+    address = json['address'];
+    phone = json['phone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
+    data['description'] = this.description;
+    data['address'] = this.address;
+    data['phone'] = this.phone;
     return data;
   }
 }
